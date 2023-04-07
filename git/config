@@ -1,0 +1,24 @@
+[user]
+  email = williamdemeo@gmail.com
+  name = William DeMeo
+[merge]
+  tool = meld
+[pager]
+  branch = false
+[core]
+  editor = emacs
+	autocrlf = input
+[push]
+  autoSetupRemote = true
+[pull]
+  rebase = false
+[init]
+  defaultBranch = main
+
+[includeIf "gitdir:~/git/hub/IO/"]
+  path = ~/.config/git/gitconfig-io
+
+[includeIf "gitdir:~/IOHK/"]
+  path = ~/.config/git/gitconfig-io
+
+
