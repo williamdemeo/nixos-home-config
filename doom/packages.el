@@ -19,10 +19,10 @@
 ;; or
 (package! blamer :recipe (:host github :repo "artawower/blamer.el"))
 
-(package! font-utils)
-(package! ucs-utils)
-(package! list-utils)
-(package! unicode-fonts)
+;(package! font-utils)
+;(package! ucs-utils)
+;(package! list-utils)
+;(package! unicode-fonts)
 (package! nix-update)
 
 ;; If the package you are trying to install does not contain a PACKAGENAME.el

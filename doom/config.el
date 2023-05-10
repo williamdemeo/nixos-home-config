@@ -11,37 +11,7 @@
 (setq user-full-name "William DeMeo"
       user-mail-address "williamdemeo@gmail.com")
 
-;; Doom exposes five (optional) variables for controlling fonts in Doom:
-;;
-;; - `doom-font' -- the primary font to use
-;; - `doom-variable-pitch-font' -- a non-monospace font (where applicable)
-;; - `doom-big-font' -- used for `doom-big-font-mode'; use this for
-;;   presentations or streaming.
-;; - `doom-unicode-font' -- for unicode glyphs
-;; - `doom-serif-font' -- for the `fixed-pitch-serif' face
-;;
-;; See 'C-h v doom-font' for documentation and more examples of what they
-;; accept. For example:
-;;
-;;(add-to-list 'load-path "~/.local/straight/build-28.2/unicode-fonts")
-;;(require 'unicode-fonts)
-;;(unicode-fonts-setup)
-;;(require 'font-utils)
-;;(font-utils-exists-p "Courier")
 
-;;(set-fontset-font "fontset-default" nil
-;;                (font-spec :name "DejaVu Sans"))
-
-
-;;(setq doom-unicode-font (font-spec :family "Fira Mono"))
-
-
-;(setq
-;  doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
-;  doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13)
-;  doom-unicode-font (font-spec :family "Fira Mono")
-;)
-;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
 ;; refresh your font settings. If Emacs still can't find your font, it likely
@@ -97,13 +67,6 @@
 (load-file (let ((coding-system-for-read 'utf-8))
                 (shell-command-to-string "agda-mode locate")))
 
-(add-hook 'agda2-mode-hook (lambda ()
-                             (setq smartparens-mode nil)
-                             (setq electric-indent-mode nil)
-                              C-c l f         agda2-next-goal
-
-                             ))
-
 (setq my/ledger-agda-name "~/IOHK/ledger-agda")
 (defun my/toggle-ledger-agda ()
   (interactive)
@@ -113,6 +76,11 @@
   (agda2-restart))
 (with-eval-after-load 'agda2-mode (define-key agda2-mode-map (kbd "C-c C-x C-t") 'my/toggle-ledger-agda))
 
+(add-hook 'agda2-mode-hook (lambda ()
+                             (setq smartparens-mode nil)
+                             (setq electric-indent-mode nil)
+                              ;C-c l f         agda2-next-goal
+                             ))
 
 
 ;; git blamer mode
@@ -123,10 +91,11 @@
   :custom
   (blamer-idle-time 0.3)
   (blamer-min-offset 70)
-  ;; :custom-face
-  ;; (blamer-face ((t :foreground "#7a88cf"
-  ;;                   :background nil
-  ;;                   :height 140
-  ;;                   :italic t)))
   :config
   (global-blamer-mode 1))
+
+(with-eval-after-load "magit"
+  (magit-add-section-hook 'magit-status-sections-hook
+                          'magit-insert-unpushed-to-upstream-or-recent
+  )
+)
